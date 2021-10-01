@@ -20,12 +20,12 @@ public class Main {
     //Constantes que definem as mensagens para o utilizador
     public static final String CONTACT_EXISTS = "contactBook.Contact already exists.";
     public static final String NAME_NOT_EXIST = "contactBook.Contact does not exist.";
-    public static final String PHONE_NOT_EXISTS = "contactBook.Phone number does not exist.";
+    public static final String PHONE_NOT_EXISTS = "Phone number does not exist.";
     public static final String CONTACT_ADDED = "contactBook.Contact added.";
     public static final String CONTACT_REMOVED = "contactBook.Contact removed.";
     public static final String CONTACT_UPDATED = "contactBook.Contact updated.";
-    public static final String CONTACTS_SHARE_PHONES = "contactBook.There are contacts that share phone numbers.";
-    public static final String CONTACTS_DIFFERENT_PHONES = "contactBook.All contacts have different phone numbers.";
+    public static final String CONTACTS_SHARE_PHONES = "There are contacts that share phone numbers.";
+    public static final String CONTACTS_DIFFERENT_PHONES = "All contacts have different phone numbers.";
     public static final String BOOK_EMPTY = "contactBook.Contact book empty.";
     public static final String QUIT_MSG = "Goodbye!";
     public static final String COMMAND_ERROR = "Unknown command.";
@@ -171,24 +171,7 @@ public class Main {
     }
 
     private static void equalPhones(ContactBook cBook){
-        boolean found = false;
-        ContactBook auxBook = cBook;
-        cBook.initializeIterator();
-        while(cBook.hasNext() && !found){
-            Contact c = cBook.next();
-            auxBook.initializeIterator();
-            int counter = -1;
-            while(auxBook.hasNext()){
-                Contact auxC = auxBook.next();
-                if(c.getPhone() == auxC.getPhone()){
-                    counter++;
-                }
-            }
-            if(counter > 0){
-                found = true;
-            }
-        }
-        if(!found){
+        if(!cBook.checkDups()){
             System.out.println(CONTACTS_DIFFERENT_PHONES);
         } else {
             System.out.println(CONTACTS_SHARE_PHONES);

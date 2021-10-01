@@ -1,7 +1,5 @@
 package contactBook;
 
-import contactBook.Contact;
-
 public class ContactBook {
     static final int DEFAULT_SIZE = 100;
 
@@ -110,6 +108,18 @@ public class ContactBook {
     //Pre: hasNext()
     public Contact next() {
         return contacts[currentContact++];
+    }
+
+    public boolean checkDups(){
+        boolean found = false;
+        for(int i = 0; i < counter && !found; i++){
+            for(int j = i + 1; j < counter && !found; j++){
+                if(contacts[i].getPhone() == contacts[j].getPhone()){
+                    found = true;
+                }
+            }
+        }
+        return found;
     }
 
 }
