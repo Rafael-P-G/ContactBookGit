@@ -10,17 +10,22 @@ public class Main {
     public static final String REMOVE_CONTACT = "RC";
     public static final String GET_PHONE      = "GP";
     public static final String GET_EMAIL      = "GE";
+    public static final String GET_NAME      = "GN";
     public static final String SET_PHONE      = "SP";
     public static final String SET_EMAIL      = "SE";
     public static final String LIST_CONTACTS  = "LC";
+    public static final String EQUAL_PHONES  = "EP";
     public static final String QUIT           = "Q";
 
     //Constantes que definem as mensagens para o utilizador
     public static final String CONTACT_EXISTS = "contactBook.Contact already exists.";
     public static final String NAME_NOT_EXIST = "contactBook.Contact does not exist.";
+    public static final String PHONE_NOT_EXISTS = "contactBook.Phone number does not exist.";
     public static final String CONTACT_ADDED = "contactBook.Contact added.";
     public static final String CONTACT_REMOVED = "contactBook.Contact removed.";
     public static final String CONTACT_UPDATED = "contactBook.Contact updated.";
+    public static final String CONTACTS_SHARE_PHONES = "contactBook.There are contacts that share phone numbers.";
+    public static final String CONTACTS_DIFFERENT_PHONES = "contactBook.All contacts have different phone numbers.";
     public static final String BOOK_EMPTY = "contactBook.Contact book empty.";
     public static final String QUIT_MSG = "Goodbye!";
     public static final String COMMAND_ERROR = "Unknown command.";
@@ -44,6 +49,9 @@ public class Main {
                 case GET_EMAIL:
                     getEmail(in,cBook);
                     break;
+                case GET_NAME:
+                    getName(in, cBook);
+                    break;
                 case SET_PHONE:
                     setPhone(in,cBook);
                     break;
@@ -52,6 +60,9 @@ public class Main {
                     break;
                 case LIST_CONTACTS:
                     listAllContacts(cBook);
+                    break;
+                case EQUAL_PHONES:
+                    equalPhones(cBook);
                     break;
                 default:
                     System.out.println(COMMAND_ERROR);
@@ -113,6 +124,17 @@ public class Main {
         else System.out.println(NAME_NOT_EXIST);
     }
 
+    private static void getName(Scanner in,ContactBook cBook){
+        int phone;
+        phone = in.nextInt(); in.nextLine();
+        if(cBook.hasPhone(phone)){
+            System.out.println(cBook.getName(phone));
+        }
+        else{
+            System.out.println(PHONE_NOT_EXISTS);
+        }
+    }
+
     private static void setPhone(Scanner in, ContactBook cBook) {
         String name;
         int phone;
@@ -146,5 +168,9 @@ public class Main {
             }
         }
         else System.out.println(BOOK_EMPTY);
+    }
+
+    private static void equalPhones(ContactBook cBook){
+
     }
 }
