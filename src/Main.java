@@ -171,6 +171,28 @@ public class Main {
     }
 
     private static void equalPhones(ContactBook cBook){
+        boolean found = false;
+        ContactBook auxBook = cBook;
+        cBook.initializeIterator();
+        while(cBook.hasNext() && !found){
+            Contact c = cBook.next();
+            auxBook.initializeIterator();
+            int counter = -1;
+            while(auxBook.hasNext()){
+                Contact auxC = auxBook.next();
+                if(c.getPhone() == auxC.getPhone()){
+                    counter++;
+                }
+            }
+            if(counter > 0){
+                found = true;
+            }
+        }
+        if(!found){
+            System.out.println(CONTACTS_DIFFERENT_PHONES);
+        } else {
+            System.out.println(CONTACTS_SHARE_PHONES);
+        }
 
     }
 }
