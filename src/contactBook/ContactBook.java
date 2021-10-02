@@ -66,28 +66,24 @@ public class ContactBook {
 
     private int searchIndex(String name) {
         int i = 0;
-        int result = -1;
-        boolean found = false;
-        while (i<counter && !found)
+
+        while (i<counter) {
             if (contacts[i].getName().equals(name))
-                found = true;
-            else
-                i++;
-        if (found) result = i;
-        return result;
+                return i;
+            i++;
+        }
+        return -1;
     }
 
     private int searchIndex(int phone) {
         int i = 0;
-        int result = -1;
-        boolean found = false;
-        while (i<counter && !found)
+
+        while (i<counter) {
             if (contacts[i].getPhone() == phone)
-                found = true;
-            else
-                i++;
-        if (found) result = i;
-        return result;
+                return i;
+            i++;
+        }
+        return -1;
     }
 
     private void resize() {
